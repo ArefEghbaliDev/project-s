@@ -1,3 +1,6 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb", "plugin:@typescript-eslint/recommended", "prettier"]
+    "extends": ["next/core-web-vitals", "airbnb", "plugin:@typescript-eslint/recommended", "prettier"],
+    "rules": {
+        "@next/next/no-document-import-in-page": "off"
+    }
 }
