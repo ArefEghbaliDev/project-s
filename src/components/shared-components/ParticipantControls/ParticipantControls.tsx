@@ -8,13 +8,13 @@ const ParticipantControls = () => {
             <div className="rounded py-3 px-5 flex items-center bg-black mr-3">
                 <p className="text-white font-medium text-lg">00:00</p>
             </div>
-            <IconButton type="button" className="mr-3">
+            <IconButton type="button" className="mr-3" color="default">
                 <FiRefreshCcw size={24} />
             </IconButton>
-            <IconButton type="button" className="mr-3">
+            <IconButton type="button" className="mr-3" color="default">
                 <FiSettings size={24} />
             </IconButton>
-            <IconButton type="button">
+            <IconButton type="button" color="danger">
                 <FiX size={24} />
             </IconButton>
         </div>

@@ -4,11 +4,13 @@ import { NextPage } from "next";
 import Head from "next/head";
 import RemoteParticipantView from "components/shared-components/RemoteParticipantView";
 import { useEffect } from "react";
-import { useAppDispatch } from "hooks/useReduxHooks";
+import { useAppDispatch, useAppSelector } from "hooks/useReduxHooks";
 import { getSocketInstance } from "services/websocket/SocketClient";
 
 const index: NextPage = () => {
     const dispatch = useAppDispatch();
+
+    const remoteParticipantState = useAppSelector((state) => state.peer.remoteStreamState);
 
     useEffect(() => {
         getSocketInstance(dispatch);
@@ -20,7 +22,7 @@ const index: NextPage = () => {
                 <title>Project S</title>
             </Head>
             <LocalParticipantView />
-            <RemoteParticipantView />
+            {(remoteParticipantState.video || remoteParticipantState.audio) && <RemoteParticipantView />}
             <ParticipantControls />
         </div>
     );
