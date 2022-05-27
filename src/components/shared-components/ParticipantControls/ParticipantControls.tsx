@@ -1,15 +1,18 @@
 import IconButton from "components/ui-components/Button/IconButton";
 
-import { FiCamera, FiMic, FiX } from "react-icons/fi";
+import { FiCamera, FiMic, FiRefreshCcw, FiSettings, FiX } from "react-icons/fi";
 
 const ParticipantControls = () => {
     return (
         <div className="absolute left-0 bottom-0 w-full p-5 flex items-center justify-center">
-            <IconButton type="button">
-                <FiMic size={24} />
+            <div className="rounded py-3 px-5 flex items-center bg-black mr-3">
+                <p className="text-white font-medium text-lg">00:00</p>
+            </div>
+            <IconButton type="button" className="mr-3">
+                <FiRefreshCcw size={24} />
             </IconButton>
-            <IconButton type="button" className="mx-5">
-                <FiCamera size={24} />
+            <IconButton type="button" className="mr-3">
+                <FiSettings size={24} />
             </IconButton>
             <IconButton type="button">
                 <FiX size={24} />

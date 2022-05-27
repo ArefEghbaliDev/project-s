@@ -1,13 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type TUpdateRemoteState = {
+    type: "video" | "audio";
+    state: boolean;
+};
+
 interface IPeerInitialState {
     peerConnectionStatus: "idle" | "created";
-    isRemoteStreamReceived: boolean;
+    remoteStreamState: {
+        video: boolean;
+        audio: boolean;
+    };
 }
 
 const initialState: IPeerInitialState = {
     peerConnectionStatus: "idle",
-    isRemoteStreamReceived: false,
+    remoteStreamState: {
+        video: false,
+        audio: false,
+    },
 };
 
 const peerSlice = createSlice({
@@ -17,8 +28,8 @@ const peerSlice = createSlice({
         updatePeerConnectionStatus: (state, action: PayloadAction<"idle" | "created">) => {
             state.peerConnectionStatus = action.payload;
         },
-        updateIsRemoteStreamReceived: (state, action: PayloadAction<boolean>) => {
-            state.isRemoteStreamReceived = action.payload;
+        updateIsRemoteStreamReceived: (state, action: PayloadAction<TUpdateRemoteState>) => {
+            state.remoteStreamState[action.payload.type] = action.payload.state;
         },
     },
 });

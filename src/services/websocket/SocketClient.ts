@@ -25,42 +25,38 @@ export class SocketClient {
 
         this.socket.on("connect", () => {
             console.log("CONNECTED");
-
-            this.socket.emit("matching", {
-                name: room,
-            });
         });
 
-        this.socket.on("joined-room", () => {
+        this.socket.on("joined-room", async () => {
             console.log("Joined room");
-            this.p2p.createOffer(this.socket, room);
+            await this.p2p.createOffer(this.socket, room);
         });
 
-        this.socket.on("new-data", (data) => {
-            console.log("peer data", data);
-
+        this.socket.on("new-data", async (data) => {
             const parsedData = JSON.parse(data);
 
             if (parsedData.type === "offer") {
-                console.log("adding data", parsedData.type, parsedData.offer);
-                this.p2p.createAnswer(this.socket, room, parsedData.offer);
+                await this.p2p.createAnswer(this.socket, room, parsedData.offer);
             }
 
             if (parsedData.type === "answer") {
-                console.log("adding data", parsedData.type, parsedData.answer);
-                this.p2p.addAnswer(parsedData.answer);
+                await this.p2p.addAnswer(parsedData.answer);
             }
 
             if (parsedData.type === "candidate") {
-                console.log("candidate", parsedData);
-                console.log("adding candidate", parsedData.type, parsedData.candidate);
-                this.p2p.addIceCandidate(parsedData.candidate);
+                await this.p2p.addIceCandidate(parsedData.candidate);
             }
         });
     }
 
     public get getSocket() {
         return this.socket;
+    }
+
+    public readyForMatch() {
+        this.socket.emit("matching", {
+            name: "Aref",
+        });
     }
 }
 

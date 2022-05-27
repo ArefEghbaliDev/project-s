@@ -1,9 +1,10 @@
 import ParticipantControls from "components/shared-components/ParticipantControls";
-import ParticipantView from "components/shared-components/ParticipantView";
-import { useAppDispatch } from "hooks/useReduxHooks";
+import LocalParticipantView from "components/shared-components/LocalParticipantView";
 import { NextPage } from "next";
 import Head from "next/head";
+import RemoteParticipantView from "components/shared-components/RemoteParticipantView";
 import { useEffect } from "react";
+import { useAppDispatch } from "hooks/useReduxHooks";
 import { getSocketInstance } from "services/websocket/SocketClient";
 
 const index: NextPage = () => {
@@ -18,8 +19,8 @@ const index: NextPage = () => {
             <Head>
                 <title>Project S</title>
             </Head>
-            <ParticipantView isLocal={true} />
-            <ParticipantView isLocal={false} />
+            <LocalParticipantView />
+            <RemoteParticipantView />
             <ParticipantControls />
         </div>
     );
