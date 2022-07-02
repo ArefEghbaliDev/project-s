@@ -47,7 +47,7 @@ const LocalParticipantView = () => {
     }, []);
 
     return (
-        <div className={clsx("overflow-hidden w-screen h-screen relative")}>
+        <div className={clsx("overflow-hidden relative local-participant")}>
             <video ref={videoRef} muted playsInline autoPlay className="object-cover absolute left-0 top-0 w-full h-full" />
         </div>
     );

@@ -5,12 +5,15 @@ type TUpdateRemoteState = {
     state: boolean;
 };
 
+type TMatchingState = "idle" | "matching" | "matched" | "failed";
+
 interface IPeerInitialState {
     peerConnectionStatus: "idle" | "created";
     remoteStreamState: {
         video: boolean;
         audio: boolean;
     };
+    matchingState: TMatchingState;
 }
 
 const initialState: IPeerInitialState = {
@@ -19,6 +22,7 @@ const initialState: IPeerInitialState = {
         video: false,
         audio: false,
     },
+    matchingState: "idle",
 };
 
 const peerSlice = createSlice({
@@ -31,9 +35,12 @@ const peerSlice = createSlice({
         updateIsRemoteStreamReceived: (state, action: PayloadAction<TUpdateRemoteState>) => {
             state.remoteStreamState[action.payload.type] = action.payload.state;
         },
+        updateMatchingState: (state, action: PayloadAction<TMatchingState>) => {
+            state.matchingState = action.payload;
+        },
     },
 });
 
 export default peerSlice.reducer;
 
-export const { updatePeerConnectionStatus, updateIsRemoteStreamReceived } = peerSlice.actions;
+export const { updatePeerConnectionStatus, updateIsRemoteStreamReceived, updateMatchingState } = peerSlice.actions;

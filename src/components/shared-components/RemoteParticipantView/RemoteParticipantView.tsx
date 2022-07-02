@@ -60,8 +60,14 @@ const RemoteParticipantView = () => {
     }, [peerState.peerConnectionStatus, peerState.remoteStreamState]);
 
     return (
-        <div className={clsx("overflow-hidden w-60 h-52 absolute right-5 rounded bottom-5 shadow-lg")}>
-            <video ref={videoRef} muted playsInline autoPlay className="object-cover absolute left-0 top-0 w-full h-full" />
+        <div className={clsx("overflow-hidden relative local-participant")}>
+            <video
+                ref={videoRef}
+                muted
+                playsInline
+                autoPlay
+                className="object-cover absolute left-0 top-0 w-full h-full transform-gpu -scale-x-100"
+            />
             <audio ref={audioRef} autoPlay />
         </div>
     );

@@ -2,8 +2,6 @@ import { getPeerInstance, PeerToPeerConnection } from "services/p2p/PeerToPeerCo
 import { AppDispatch } from "services/redux/store";
 import { io, Socket } from "socket.io-client";
 
-import { v4 as uuidV4 } from "uuid";
-
 export class SocketClient {
     private socket: Socket;
     private p2p: PeerToPeerConnection;
